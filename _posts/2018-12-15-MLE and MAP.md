@@ -8,6 +8,7 @@ The most easy way is to maximize the likelihood P(D|θ,m), which means estimatin
 
 **Maximum Likelihood Estimation for Linear Regression**
 
+
 Suppose we have some data D={(x,y)} in a 2 dimensional plane and we are trying to fit a linear model y=mx+b on that data.
 ![data.png]({{site.baseurl}}/_posts/data.png)
 
@@ -24,26 +25,30 @@ The log likelhood can be written as:
 
 
 Python code for maximum likelihood estimation:
-	
+First we will import all the necessary libraries required,
+
     import numpy as np
-    import pandas as pd
     from matplotlib import pyplot as plt
-    import seaborn as sns
     from scipy.optimize import minimize
     import scipy.stats as stats
     import math
-    
+Now, we will generate data for fitting our linear model. Here, I am assuming my data is from a first order polnomial(that is points from a line) and then added some noise from a Gaussian distribution.  
+
     N=50
 	X=np.linspace(0,20,N)
 	e = np.random.normal(loc = 0.0, scale = 4.0, size = N)
 	y=5*X+4+e
     
+Here, I have defined the function to calculate the log likelihood as stated previously, it is easier to work with log likelihood than likelihood.
+
     def cal_log_likelihood(ytrue,ypred,n):
     	error=ytrue-ypred
     	sigma=np.std(error)
     	f = ((1.0/(2.0*math.pi*sigma*sigma))**(n/2))*np.exp(-1*((np.dot(error.T,error))/(2*sigma*sigma)))
     	return np.log(f+1e-130)
-	
+        
+Now we will use optimization to estimate the parameters, so for this we will minimize the negative log-likelhood (which is same as maximizing the likelihood)
+
 	def opti_fun(param):
     	ypred=param[0]*X+param[1]
     	f = cal_log_likelihood(y, ypred, float(len(ypred)))
@@ -53,7 +58,8 @@ Python code for maximum likelihood estimation:
     param = np.zeros(n_param)
     param[0] = -10.0
     param[1] = 100.5
-    from scipy.optimize import minimize
-    res = minimize(opti_fun, param, method = 'BFGS', options={'disp': True})
+    res = minimize(opti_fun, param, method = `BFGS`, options = {`disp`: True})
+    
  
  ![]({{site.baseurl}}/_posts/predict.png)
+In the above figure,I have plotted the predicted linear model after the optimization.
