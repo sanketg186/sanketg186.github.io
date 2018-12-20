@@ -17,5 +17,43 @@ Now, we can model P(y|w,x) as a Gaussian
 ![second equation](http://latex.codecogs.com/gif.latex?%5Cinline%20P%28y%7Cw%2Cx%29%20%3D%20%5Cmathcal%7BN%7D%28w%5E%7BT%7Dx%2C%5Cbeta%5E%7B-1%7D%29%2C%5Cbeta%5E%7B-1%7D%3D%5Csigma%5E%7B2%7D)
 
 ![third equation](http://latex.codecogs.com/gif.latex?%5Cinline%20P%28y%7Cw%2Cx%29%20%3D%20%5Cmathcal%7BN%7D%28w%5E%7BT%7Dx%2C%5Cbeta%5E%7B-1%7D%29%20%3D%20%5Csqrt%7B%5Cfrac%7B%5Cbeta%7D%7B2%5Cpi%7D%7D%5Cexp%7B%5Cleft%20%5B%20-%5Cfrac%7B%5Cbeta%7D%7B2%7D%28y-w%5E%7BT%7Dx%29%5E%7B2%7D%20%5Cright%20%5D%7D)
-For all the data points, it can be written as:
+The likelihood can be written as:
 ![fourth equation](http://latex.codecogs.com/gif.latex?%5Cinline%20P%28y%7Cw%2CX%29%20%3D%20%5Cprod_%7Bn%3D1%7D%5E%7BN%7DP%28y_%7Bn%7D%7Cw%2Cx_%7Bn%7D%29%20%3D%20%5Cleft%20%28%20%5Cfrac%7B%5Cbeta%7D%7B2%5Cpi%7D%20%5Cright%20%29%5E%7B%5Cfrac%7BN%7D%7B2%7D%7Dexp%5Cleft%20%5B%20-%5Cfrac%7B%5Cbeta%7D%7B2%7D%5Cleft%20%28%20y_%7Bn%7D-w%5E%7BT%7Dx_%7Bn%7D%20%5Cright%20%29%5E%7B2%7D%20%5Cright%20%5D)
+The log likelhood can be written as:
+![](http://latex.codecogs.com/gif.latex?%5Clog%20P%28y%7Cw%2CX%29%20%5Cpropto%20-%5Cfrac%7B%5Cbeta%7D%7B2%7D%5Csum_%7Bn%3D1%7D%5E%7BN%7D%28y_%7Bn%7D-w%5E%7BT%7Dx_%7Bn%7D%29%5E%7B2%7D)
+
+
+Python code for maximum likelihood estimation:
+	
+    import numpy as np
+    import pandas as pd
+    from matplotlib import pyplot as plt
+    import seaborn as sns
+    from scipy.optimize import minimize
+    import scipy.stats as stats
+    import math
+    
+    N=50
+	X=np.linspace(0,20,N)
+	e = np.random.normal(loc = 0.0, scale = 4.0, size = N)
+	y=5*X+4+e
+    
+    def cal_log_likelihood(ytrue,ypred,n):
+    	error=ytrue-ypred
+    	sigma=np.std(error)
+    	f = ((1.0/(2.0*math.pi*sigma*sigma))**(n/2))*np.exp(-1*((np.dot(error.T,error))/(2*sigma*sigma)))
+    	return np.log(f+1e-130)
+	
+	def opti_fun(param):
+    	ypred=param[0]*X+param[1]
+    	f = cal_log_likelihood(y, ypred, float(len(ypred)))
+    	return -1*f
+    
+    n_param = 2
+    param = np.zeros(n_param)
+    param[0] = -10.0
+    param[1] = 100.5
+    from scipy.optimize import minimize
+    res = minimize(opti_fun, param, method='BFGS',options={'disp': True})
+ 
+ ![]({{site.baseurl}}/_posts/predict.png)![predict.png]({{site.baseurl}}/_posts/predict.png)
