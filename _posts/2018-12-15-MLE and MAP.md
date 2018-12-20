@@ -54,6 +54,6 @@ Python code for maximum likelihood estimation:
     param[0] = -10.0
     param[1] = 100.5
     from scipy.optimize import minimize
-    res = minimize(opti_fun, param, method='BFGS',options={'disp': True})
+    res = minimize(opti_fun, param, method = 'BFGS', options = {'disp': True})
  
- ![]({{site.baseurl}}/_posts/predict.png)![predict.png]({{site.baseurl}}/_posts/predict.png)
+ ![]({{site.baseurl}}/_posts/predict.png)
