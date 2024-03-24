@@ -97,14 +97,15 @@ The transformer initially used Byte-Pair Encoding (BPE) tokenization, but other 
 
 Embeddings: These tokens are converted to embeddings. These embeddings are low dimensional vectors that capture semantic and syntactic information about the entities they represent.
 
-Positional Encoding: As our model lacks recurrence and convolution, preserving the sequence's order requires injecting information about the relative or absolute position of tokens. Thus, we introduce "positional encodings" into the input embeddings at the base of both the encoder and decoder stacks. These encodings share the same dimension $`d_{model} `$ as the embeddings, allowing for their summation.
+### Positional Encoding
+As our model lacks recurrence and convolution, preserving the sequence's order requires injecting information about the relative or absolute position of tokens. Thus, we introduce "positional encodings" into the input embeddings at the base of both the encoder and decoder stacks. These encodings share the same dimension $`d_{model} `$ as the embeddings, allowing for their summation.
 
 In their work, they used sine and cosine functions of different frequencies:
-``` math
+```math
 PE_{(pos,2i)} = \sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})
 ```
 
-``` math
+```math
 PE_{(pos,2i+1)} = \sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})
 ```
 ### Multi-Headed Attention
