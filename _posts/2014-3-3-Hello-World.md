@@ -103,6 +103,7 @@ In their work, they used sine and cosine functions of different frequencies:
 ``` math
 PE_{(pos,2i)} = \sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})
 ```
+
 ``` math
 PE_{(pos,2i+1)} = \sin(\frac{pos}{10000^{\frac{2i}{d_{model}}}})
 ```
