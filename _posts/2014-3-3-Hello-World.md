@@ -129,5 +129,3 @@ Additionally, the decoder introduces a third primary sublayer, namely the masked
 ## References
 <a id="1">[1]</a> 
 [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
-
-![_config.yml]({{ site.baseurl }}/images/config.png)
