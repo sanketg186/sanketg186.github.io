@@ -47,7 +47,7 @@ A crucial aspect of the transformer model is the inclusion of residual connectio
 LayerNorm(x + Sublayer(x))
 ```
 Sublayer(x) is the function implemented by the sub-layer itself.
-To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $` d_{model} = 512 `$
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $` d\_{model} = 512 `$
 
 Although the structural composition of each layer within the six-layer encoder is identical, the content within each layer may differ. For instance, the embedding sublayer is exclusively present in the initial layer of the stack. The subsequent five layers lack an embedding layer, ensuring stability in the encoded input across all layers.
 
