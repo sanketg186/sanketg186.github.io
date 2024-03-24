@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tansformers
+title: Transformers
 ---
 ## Introduction
 In recent years, transformers have emerged as a powerful architecture in the field of machine learning, revolutionizing natural language processing (NLP), computer vision, and other domains. With their ability to capture long-range dependencies and context, transformers have become the backbone of many state-of-the-art models. In this blog, we'll explore what transformers are, how they work, and their applications in machine learning.
@@ -23,6 +23,7 @@ In the context of transformers, attention can be broadly categorized into self-a
 Self-attention, also known as intra-attention, allows the model to weigh the importance of different words in a sequence with respect to each other. It computes attention scores between all pairs of words in the input sequence and uses these scores to create weighted representations of each word. The attention scores are calculated based on the similarity between the embeddings of the words.
 
 Example:
+
 Consider the sentence: "The cat sat on the mat." In self-attention, each word's embedding is compared to the embeddings of all other words in the sentence. For instance, when calculating the representation of the word "cat," the model assigns higher weights to words like "the" and "sat," which are closely related to "cat" in the context of the sentence, while assigning lower weights to less relevant words like "on" and "mat."
 
 ### Multi Headed Attention
@@ -31,9 +32,11 @@ The vectors responsible for tokens are broken up into multiple parts called head
 This process can be parallelized, which enables training the model faster. It also allows the model to learn the context of the words better.
 
 Example:
+
 Continuing with the example sentence, in multi-headed attention, the model may learn to attend to different aspects of the sentence concurrently. For instance, one head might focus on the syntactic structure of the sentence, while another head might focus on the semantic relationships between words. By incorporating multiple heads, the model can capture a richer and more diverse set of dependencies within the input sequence.
 
 ## Deeper into the Transformer
+
 ### Encoder: 
 The encoder layer structure in the transformer model remains consistent across all six layers. Each layer comprises two primary sublayers: a multi-headed attention mechanism and a fully connected position-wise feedforward network, depicted in the accompanying figure.
 
