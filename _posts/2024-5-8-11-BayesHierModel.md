@@ -46,7 +46,7 @@ We want to understand the overall distribution of test scores while accounting f
 
 Data:
 Let's assume we have the following test scores for students from three different schools:
-![alt text](images/school_data.png)
+<img width="348" alt="image" src="https://raw.githubusercontent.com/sanketg186/sanketg186.github.io/master/images/school_data.png">
 
 Level 1 (Student Level): Each student's test score is assumed to come from a normal distribution centered around the mean test score for their school.
 
