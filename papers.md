@@ -10,23 +10,31 @@ This section contains detailed explanations and analyses of interesting research
 
 ---
 
-{% for paper in site.papers %}
-### [{{ paper.title }}]({{ paper.url | relative_url }})
-**Authors:** {{ paper.authors }}  
-**Year:** {{ paper.year }}  
-**Venue:** {{ paper.venue }}  
-**Categories:** {{ paper.categories | join: ", " }}
+<div class="posts">
+  {% for paper in site.papers reversed %}
+    <article class="post">
+      <h1><a href="{{ site.baseurl }}{{ paper.url }}">{{ paper.title }}</a></h1>
+      
+      <div class="paper-meta">
+        <p><strong>Authors:</strong> {{ paper.authors }}</p>
+        <p><strong>Year:</strong> {{ paper.year }} | <strong>Venue:</strong> {{ paper.venue }}</p>
+        <p class="paper-categories">
+          <strong>Categories:</strong>
+          {% for category in paper.categories %}
+            <span class="category-tag">{{ category }}</span>
+          {% endfor %}
+        </p>
+      </div>
 
-{{ paper.excerpt | strip_html | truncatewords: 50 }}
+      <div class="entry">
+        {{ paper.excerpt }}
+      </div>
 
-**Key Contributions:**
-- Introduces BPE as a data-driven approach to subword segmentation
-- Shows substantial improvements in translation quality for rare words
-- Demonstrates the effectiveness of subword units in neural translation models
+      <div class="paper-date">
+        <!-- <em>Explained on {{ paper.date | date: "%B %e, %Y" }}</em> -->
+      </div>
 
-*Explained on {{ paper.date | date: "%B %d, %Y" }}*
-
----
-{% endfor %}
-
-*This page is regularly updated with new paper explanations and analyses.* 
+      <a href="{{ site.baseurl }}{{ paper.url }}" class="read-more">READ MORE</a>
+    </article>
+  {% endfor %}
+</div>
